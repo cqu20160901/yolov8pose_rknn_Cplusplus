@@ -1,4 +1,4 @@
-![image](https://github.com/cqu20160901/yolov8pose_rknn_Cplusplus/assets/22290931/726a65a1-217d-4ea8-a0b1-bbe072168699)# yolov8pose_rknn_Cplusplus
+# yolov8pose_rknn_Cplusplus
 
 yolov8pose  瑞芯微 rknn 板端 C++部署，使用平台 rk3588。模型转换和仿真测试参考 [onnx转rknn](https://blog.csdn.net/zhangqian_1/article/details/131857506)。
 
