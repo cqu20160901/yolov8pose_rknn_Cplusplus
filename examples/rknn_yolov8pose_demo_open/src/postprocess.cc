@@ -120,7 +120,7 @@ int GetResultRectYolov8::GetConvDetectionResult(int8_t **pBlob, std::vector<int>
     {
         int8_t *reg = (int8_t *)pBlob[index * 2 + 0];
         int8_t *cls = (int8_t *)pBlob[index * 2 + 1];
-        int8_t *pose = (int8_t *)pBlob[index + 6];
+        int8_t *pose = (int8_t *)pBlob[index + headNum * 2];
 
         quant_zp_reg = qnt_zp[index * 2 + 0];
         quant_zp_cls = qnt_zp[index * 2 + 1];
