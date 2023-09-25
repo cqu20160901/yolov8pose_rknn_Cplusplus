@@ -270,7 +270,7 @@ int detect(char *model_path, char *image_path, char *save_image_path)
     PostProcess.GetConvDetectionResult(pblob, out_zps, out_scales, DetectiontRects, DetectKeyPoints);
 
     gettimeofday(&stop_time1, NULL);
-    printf("once run use %f ms\n", (__get_us(stop_time1) - __get_us(stop_time)) / 1000);
+    printf("postprocess run use %f ms\n", (__get_us(stop_time1) - __get_us(stop_time)) / 1000);
 
     int KeyPoinstNum = 17;
     float pose_score = 0;
