@@ -272,11 +272,11 @@ int detect(char *model_path, char *image_path, char *save_image_path)
     gettimeofday(&stop_time1, NULL);
     printf("postprocess run use %f ms\n", (__get_us(stop_time1) - __get_us(stop_time)) / 1000);
 
-    int KeyPoinstNum = 17;
+    int KeyPointsNum = 17;
     float pose_score = 0;
     int pose_x = 0, pose_y = 0;
     int NumIndex = 0, Temp = 0;
-
+	
     for (int i = 0; i < DetectiontRects.size(); i += 6)
     {
         int classId = int(DetectiontRects[i + 0]);
@@ -290,9 +290,10 @@ int detect(char *model_path, char *image_path, char *save_image_path)
         sprintf(text1, "%d:%.2f", classId, conf);
         rectangle(src_image, cv::Point(xmin, ymin), cv::Point(xmax, ymax), cv::Scalar(255, 0, 0), 2);
         putText(src_image, text1, cv::Point(xmin, ymin + 15), cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 0, 255), 2);
-
+	
+	Temp = 0; 
         // 关键点
-        for (int k = NumIndex * KeyPoinstNum * 3; k < (NumIndex + 1)* KeyPoinstNum * 3 ; k += 3)
+        for (int k = NumIndex * KeyPointsNum * 3; k < (NumIndex + 1)* KeyPointsNum * 3 ; k += 3)
         {
             pose_score = DetectKeyPoints[k + 0];
             
@@ -300,7 +301,6 @@ int detect(char *model_path, char *image_path, char *save_image_path)
             {
                 pose_x = int(DetectKeyPoints[k + 1] * float(img_width) + 0.5);
                 pose_y = int(DetectKeyPoints[k + 2] * float(img_height) + 0.5);
-                
                 if(Temp < 5)
                 {
                     cv::circle(src_image, cv::Point(pose_x, pose_y), 2, cv::Scalar(0, 0, 255), 5);
@@ -316,7 +316,6 @@ int detect(char *model_path, char *image_path, char *save_image_path)
             }
             Temp += 1;
         }
-
         NumIndex += 1;
     }
 
@@ -342,9 +341,9 @@ int detect(char *model_path, char *image_path, char *save_image_path)
 
 int main(int argc, char **argv)
 {
-    char model_path[256] = "/home/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/model/RK3588/yolov8pos_relu_zq.rknn";
-    char image_path[256] = "/home/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/test.jpg";
-    char save_image_path[256] = "/home/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/test_result.jpg";
+    char model_path[256] = "/home/firefly/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/model/RK3588/yolov8pos_relu_zq.rknn";
+    char image_path[256] = "/home/firefly/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/test.jpg";
+    char save_image_path[256] = "/home/firefly/zhangqian/rknn/examples/rknn_yolov8pose_demo_open/test_result.jpg";
 
     detect(model_path, image_path, save_image_path);
     return 0;
