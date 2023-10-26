@@ -113,7 +113,6 @@ int GetResultRectYolov8::GetConvDetectionResult(int8_t **pBlob, std::vector<int>
     float quant_scale_cls = 0, quant_scale_reg = 0, quant_scale_pose = 0;
     KeyPoint Point;
 
-    DetectRect temp;
     std::vector<DetectRect> detectRects;
 
     for (int index = 0; index < headNum; index++)
@@ -169,6 +168,7 @@ int GetResultRectYolov8::GetConvDetectionResult(int8_t **pBlob, std::vector<int>
 
                     if (xmin >= 0 && ymin >= 0 && xmax <= input_w && ymax <= input_h)
                     {
+                        DetectRect temp;
                         temp.xmin = xmin / input_w;
                         temp.ymin = ymin / input_h;
                         temp.xmax = xmax / input_w;
